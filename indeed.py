@@ -19,14 +19,29 @@ def extract_indeed_pages():
     max_page = pages[-1]
     return max_page
 
+def extract_job(soup):
+    title=  soup.find("h2",{"class":"jobTitle"}).find("span",title=True).string
+    company= soup.find("span",{"class":"companyName"})
+    if company.find("a") == None:
+        companyN=company.string
+    else:
+        companyN=company.find("a").string
+    location=soup.find("div",{"class":"companyLocation"})
+    if location.string ==None:
+        location='Remote'
+    else:
+        location=location.string
+    jobId=soup.select('a')[0]['data-jk']
+    return {'title':title, 'company':companyN,'location':location,'link':f"https://www.indeed.com/viewjob?jk={jobId}&from=web&vjs=3"}
 
 def extract_indeed_jobs(last_page):
     jobs = []
     for page in range(last_page):
         result = requests.get(f"{URL}&start={page*LIMIT}")
         soup = bs(result.text, "html.parser")
-        results = soup.find_all("h2", {"class": "jobTitle"})
+        results = soup.find_all("a",{"class":"fs-unmask"})
         for re in results:
-            title = re.find("span", title=True).string
-            jobs.append(title)
+            job=extract_job(re)
+            jobs.append(job)
     return jobs
+
