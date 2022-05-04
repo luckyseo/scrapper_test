@@ -31,8 +31,8 @@ def extract_job(soup):
         location='Remote'
     else:
         location=location.string
-    jobId=soup.select('a')[0]['data-jk']
-    return {'title':title, 'company':companyN,'location':location,'link':f"https://www.indeed.com/viewjob?jk={jobId}&from=web&vjs=3"}
+    jobId=soup['data-jk']
+    return {'title':title, 'company':companyN,'location':location,'link':f"https://www.indeed.com/viewjob?jk={jobId}"}
 
 def extract_indeed_jobs(last_page):
     jobs = []
