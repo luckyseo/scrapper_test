@@ -1,6 +1,9 @@
-from indeed import extract_indeed_pages, extract_indeed_jobs
+from indeed import getJobs as get_indeed_jobs
+from save import saveToFile
+indeed_jobs=get_indeed_jobs()
 
-last_indeed_page= extract_indeed_pages()
+jobs=indeed_jobs
 
-indeed_jobs=extract_indeed_jobs(last_indeed_page)
-print(indeed_jobs)
+#csv = comma seperated val
+
+saveToFile(jobs)
