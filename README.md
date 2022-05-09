@@ -8,3 +8,5 @@ finished superscrapper
 study rest_api with flaskt
 
 wrote commit but rejected...
+try pull -> push
+Q why github donesn't show commit changed???
