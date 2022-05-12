@@ -17,3 +17,5 @@ Q why github donesn't show commit changed???
 
 add api part file using flask
 go to add new airbnb file
+
+make pipfile -> readme.md!!!ㅡ
